@@ -11,6 +11,7 @@
 package sample.jtree.example.ui;
 
 import java.awt.GridLayout;
+import javax.swing.JPanel;
 import sample.jtree.example.entity.Buah;
 import sample.jtree.example.entity.Kategori;
 import sample.jtree.example.impl.ImplementKategori;
@@ -71,6 +72,7 @@ public class PanelGalery extends javax.swing.JPanel {
 
     public void setKategori(String kategori) {
         this.kategori = kategori;
+        
     }
 
     public GaleryListener getListener() {
@@ -93,6 +95,7 @@ public class PanelGalery extends javax.swing.JPanel {
         KategoriInterface ki = new ImplementKategori();
         PanelGambar pg;
         Kategori k = ki.getByKat(kategori);
+        gridContent.removeAll();
         gridContent.setLayout(new GridLayout(0, 3, 20, 20));
         for (Buah b : k.getListBuah()) {
             pg = new PanelGambar();
@@ -102,4 +105,8 @@ public class PanelGalery extends javax.swing.JPanel {
             gridContent.add(pg);
         }
     }
+
+    
+    
+    
 }

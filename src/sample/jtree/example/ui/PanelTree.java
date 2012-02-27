@@ -94,7 +94,7 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
             Buah b=(Buah) nodeInfo;
             listener.clickLeaf(b.getPath());
         }else{
-            
+            System.out.println(node.toString());
             listener.clickNode(node.toString());
         }
         

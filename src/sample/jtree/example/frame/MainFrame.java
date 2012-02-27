@@ -101,6 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickNode(String kategori) {
                 panelGalery.setKategori(kategori);
+                panelGalery.isiGalery();
                 showPanelGalery();
             }
 
@@ -139,10 +140,11 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode gambar = null;
 
         List<Kategori> listKategori = ki.getAll();
-        int x=0;
+        
         for (Kategori kat : listKategori) {
             node = new DefaultMutableTreeNode(kat.getNama());
             top.add(node);
+            int x=0;
             for (Buah b : kat.getListBuah()) {
                 gambar = new DefaultMutableTreeNode(kat.getListBuah().get(x));
                 node.add(gambar);
