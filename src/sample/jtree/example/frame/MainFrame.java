@@ -15,10 +15,13 @@
 package sample.jtree.example.frame;
 
 import java.awt.CardLayout;
+import java.util.Enumeration;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 import sample.jtree.example.entity.Buah;
 import sample.jtree.example.entity.Kategori;
 import sample.jtree.example.impl.ImplementKategori;
@@ -34,11 +37,12 @@ public class MainFrame extends javax.swing.JFrame {
         initTreeListener();
         initGaleryListener();
         showPanelGalery();
-        
+
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Buah");
         setTree(top);
-        DefaultTreeModel model=new DefaultTreeModel(top);
+        DefaultTreeModel model = new DefaultTreeModel(top);
         panelTree.setModel(model);
+        panelTree.setTreePath(autoSelectNode(top, "Semangka"));
     }
 
     /** This method is called from within the constructor to
@@ -95,8 +99,8 @@ public class MainFrame extends javax.swing.JFrame {
     private sample.jtree.example.ui.PanelView panelView;
     // End of variables declaration//GEN-END:variables
 
-     private void initTreeListener(){
-        TreeListener listener=new TreeListener() {
+    private void initTreeListener() {
+        TreeListener listener = new TreeListener() {
 
             @Override
             public void clickNode(String kategori) {
@@ -113,12 +117,17 @@ public class MainFrame extends javax.swing.JFrame {
         };
         panelTree.setListener(listener);
     }
-    
-    private void initGaleryListener(){
-        GaleryListener listener=new GaleryListener() {
+
+    private void initGaleryListener() {
+        GaleryListener listener = new GaleryListener() {
 
             @Override
-            public void clickThumbnail(String path) {
+            public void clickThumbnail(String path,String title) {
+                DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
+                setTree(top);
+                DefaultTreeModel model = new DefaultTreeModel(top);
+                panelTree.setModel(model);
+                panelTree.setTreePath(autoSelectNode(top, title));
                 panelView.setPath(path);
                 showPanelView();
             }
@@ -127,38 +136,53 @@ public class MainFrame extends javax.swing.JFrame {
         panelGalery.setKategori("Buah");
         panelGalery.isiGalery();
     }
-    
+
     private void showCardLayout(JPanel componentCardLayout, String cardName) {
         panelIsi.removeAll();
         panelIsi.add(componentCardLayout, cardName);
         ((CardLayout) panelIsi.getLayout()).first(panelIsi);
     }
-    
-    private void setTree(DefaultMutableTreeNode top){
+
+    private void setTree(DefaultMutableTreeNode top) {
         KategoriInterface ki = new ImplementKategori();
-         DefaultMutableTreeNode node = null;
+        DefaultMutableTreeNode node = null;
         DefaultMutableTreeNode gambar = null;
 
         List<Kategori> listKategori = ki.getAll();
-        
+
         for (Kategori kat : listKategori) {
             node = new DefaultMutableTreeNode(kat.getNama());
             top.add(node);
-            int x=0;
+            int x = 0;
             for (Buah b : kat.getListBuah()) {
                 gambar = new DefaultMutableTreeNode(kat.getListBuah().get(x));
                 node.add(gambar);
                 x++;
             }
-            
+
         }
     }
-    private void showPanelView(){
+
+    private void showPanelView() {
         showCardLayout(panelView, "panelview");
     }
-    
-    private void showPanelGalery(){
-       showCardLayout(panelGalery, "panelGalery");   
+
+    private void showPanelGalery() {
+        showCardLayout(panelGalery, "panelGalery");
     }
 
+    private TreePath autoSelectNode(DefaultMutableTreeNode entityRoot, String nodeStr) {
+        DefaultMutableTreeNode node = null;
+        Enumeration e = entityRoot.breadthFirstEnumeration();
+        while (e.hasMoreElements()) {
+            node = (DefaultMutableTreeNode) e.nextElement();
+            if ((node.getUserObject().toString()).contains(nodeStr)) {
+                DefaultTreeModel m_model = new DefaultTreeModel(entityRoot);
+                TreeNode[] nodes = m_model.getPathToRoot(node);
+                TreePath path = new TreePath(nodes);
+                return path;
+            }
+        }
+        return null;
+    }
 }

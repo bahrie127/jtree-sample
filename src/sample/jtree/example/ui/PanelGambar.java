@@ -75,9 +75,7 @@ public class PanelGambar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gambarMouseClicked
-    if (evt.getClickCount() == 2) {
-        gambarMouseClicked();
-    }
+    gambarMouseClicked();
 }//GEN-LAST:event_gambarMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private sample.jtree.example.util.JPPanel gambar;
@@ -102,12 +100,13 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     }
 
     public void setNameTitle(String nameTitle) {
+        this.nameTitle=nameTitle;
         title.setText(nameTitle);
 
     }
 
     public void gambarMouseClicked() {
-        listener.clickThumbnail(path);
+        listener.clickThumbnail(path,nameTitle);
     }
 
     public GaleryListener getListener() {

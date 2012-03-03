@@ -6,6 +6,7 @@ package sample.jtree.example.interf;
 
 import java.util.List;
 import sample.jtree.example.entity.Kategori;
+import sample.jtree.example.entity.TreeModelData;
 
 /**
  *
@@ -17,5 +18,6 @@ public interface KategoriInterface {
     
     public List<Kategori> getAll();
     public Kategori getByKat(String kategori);
+    public List<TreeModelData> getAllTreeModelData();
     
 }

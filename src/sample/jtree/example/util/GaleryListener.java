@@ -12,6 +12,6 @@ package sample.jtree.example.util;
  */
 public interface GaleryListener {
     
-    public void clickThumbnail(String path);
+    public void clickThumbnail(String path,String title);
     
 }

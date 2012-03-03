@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import sample.jtree.example.connection.DatabaseUtilities;
 import sample.jtree.example.entity.Buah;
 import sample.jtree.example.entity.Kategori;
+import sample.jtree.example.entity.TreeModelData;
 import sample.jtree.example.interf.KategoriInterface;
 
 /**
@@ -85,5 +86,17 @@ public class ImplementKategori implements KategoriInterface{
             Logger.getLogger(ImplementKategori.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    @Override
+    public List<TreeModelData> getAllTreeModelData() {
+        
+        
+        
+        List<TreeModelData> listTreeModel=new ArrayList<TreeModelData>();
+        
+        
+        
+        return listTreeModel;
     }
 }

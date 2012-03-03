@@ -10,10 +10,14 @@
  */
 package sample.jtree.example.ui;
 
+import java.util.Enumeration;
+import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import sample.jtree.example.entity.Buah;
 import sample.jtree.example.util.TreeListener;
@@ -27,7 +31,7 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
     /** Creates new form PanelTree */
     public PanelTree() {
         initComponents();
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -61,6 +65,7 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
     // End of variables declaration//GEN-END:variables
     private TreeListener listener;
     private DefaultTreeModel model;
+    private TreePath treePath;
 
     public TreeListener getListener() {
         return listener;
@@ -75,29 +80,69 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
     }
 
     public void setModel(DefaultTreeModel model) {
-       
+
+        //  TreePath tp=new TreePath
         tree.setModel(model);
+        //tree.is
         tree.setRootVisible(false);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.addTreeSelectionListener(this);
+        expandAll(tree, true);
     }
-  
 
     @Override
     public void valueChanged(TreeSelectionEvent e) {
-        DefaultMutableTreeNode node=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        if(node==null){
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (node == null) {
             return;
         }
-        Object nodeInfo=node.getUserObject();
-        if(node.isLeaf()){
-            Buah b=(Buah) nodeInfo;
+        Object nodeInfo = node.getUserObject();
+
+        if (node.isLeaf()) {
+            Buah b = (Buah) nodeInfo;
             listener.clickLeaf(b.getPath());
-        }else{
-            System.out.println(node.toString());
+            // System.out.println(node);
+        } else {
+            // System.out.println(node.toString());
             listener.clickNode(node.toString());
         }
-        
+
     }
-    
+
+    public TreePath getTreePath() {
+        return treePath;
+    }
+
+    public void setTreePath(TreePath treePath) {
+        this.treePath = treePath;
+
+        tree.setSelectionPath(treePath);
+        tree.scrollPathToVisible(treePath);
+    }
+
+    public void expandAll(JTree tree, boolean expand) {
+        TreeNode root = (TreeNode) tree.getModel().getRoot();
+
+        // Traverse tree from root
+        expandAll(tree, new TreePath(root), expand);
+    }
+
+    private void expandAll(JTree tree, TreePath parent, boolean expand) {
+        // Traverse children
+        TreeNode node = (TreeNode) parent.getLastPathComponent();
+        if (node.getChildCount() >= 0) {
+            for (Enumeration e = node.children(); e.hasMoreElements();) {
+                TreeNode n = (TreeNode) e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAll(tree, path, expand);
+            }
+        }
+
+        // Expansion or collapse must be done bottom-up
+        if (expand) {
+            tree.expandPath(parent);
+        } else {
+            tree.collapsePath(parent);
+        }
+    }
 }
