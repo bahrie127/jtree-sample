@@ -49,11 +49,11 @@ public class PanelGambar extends javax.swing.JPanel {
         gambar.setLayout(gambarLayout);
         gambarLayout.setHorizontalGroup(
             gambarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 144, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         gambarLayout.setVerticalGroup(
             gambarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
+            .addGap(0, 96, Short.MAX_VALUE)
         );
 
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -62,7 +62,7 @@ public class PanelGambar extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
             .addComponent(gambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -100,13 +100,15 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     }
 
     public void setNameTitle(String nameTitle) {
-        this.nameTitle=nameTitle;
+        this.nameTitle = nameTitle;
         title.setText(nameTitle);
 
     }
 
     public void gambarMouseClicked() {
-        listener.clickThumbnail(path,nameTitle);
+        if (listener != null) {
+            listener.clickThumbnail(path, nameTitle);
+        }
     }
 
     public GaleryListener getListener() {

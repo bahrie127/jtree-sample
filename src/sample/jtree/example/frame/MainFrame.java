@@ -16,18 +16,15 @@ package sample.jtree.example.frame;
 
 import java.awt.CardLayout;
 import java.util.Enumeration;
-import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import sample.jtree.example.entity.Buah;
-import sample.jtree.example.entity.Kategori;
-import sample.jtree.example.impl.ImplementKategori;
-import sample.jtree.example.interf.KategoriInterface;
+import sample.jtree.example.entity.PenyediaData;
 import sample.jtree.example.util.GaleryListener;
 import sample.jtree.example.util.TreeListener;
+import sample.jtree.example.util.TreeUtil;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -37,12 +34,13 @@ public class MainFrame extends javax.swing.JFrame {
         initTreeListener();
         initGaleryListener();
         showPanelGalery();
-
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Buah");
-        setTree(top);
-        DefaultTreeModel model = new DefaultTreeModel(top);
+        
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
+//        setTree(top);
+       // PenyediaData pd=new PenyediaData();
+        DefaultTreeModel model = new DefaultTreeModel(TreeUtil.convertModelToNode(PenyediaData.getListTreeModel(), top));
         panelTree.setModel(model);
-        panelTree.setTreePath(autoSelectNode(top, "Semangka"));
+        //panelTree.setTreePath(autoSelectNode(top, "Semangka"));
     }
 
     /** This method is called from within the constructor to
@@ -104,8 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickNode(String kategori) {
-                panelGalery.setKategori(kategori);
-                panelGalery.isiGalery();
+                panelGalery.isiGalery(kategori);
                 showPanelGalery();
             }
 
@@ -124,8 +121,9 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickThumbnail(String path,String title) {
                 DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
-                setTree(top);
-                DefaultTreeModel model = new DefaultTreeModel(top);
+//                setTree(top);
+                DefaultTreeModel model = new DefaultTreeModel(TreeUtil.convertModelToNode(PenyediaData.getListTreeModel(), top));
+               // DefaultTreeModel model = new DefaultTreeModel(top);
                 panelTree.setModel(model);
                 panelTree.setTreePath(autoSelectNode(top, title));
                 panelView.setPath(path);
@@ -133,34 +131,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         };
         panelGalery.setListener(listener);
-        panelGalery.setKategori("Buah");
-        panelGalery.isiGalery();
+        panelGalery.isiGalery("Buah");
     }
 
     private void showCardLayout(JPanel componentCardLayout, String cardName) {
         panelIsi.removeAll();
         panelIsi.add(componentCardLayout, cardName);
         ((CardLayout) panelIsi.getLayout()).first(panelIsi);
-    }
-
-    private void setTree(DefaultMutableTreeNode top) {
-        KategoriInterface ki = new ImplementKategori();
-        DefaultMutableTreeNode node = null;
-        DefaultMutableTreeNode gambar = null;
-
-        List<Kategori> listKategori = ki.getAll();
-
-        for (Kategori kat : listKategori) {
-            node = new DefaultMutableTreeNode(kat.getNama());
-            top.add(node);
-            int x = 0;
-            for (Buah b : kat.getListBuah()) {
-                gambar = new DefaultMutableTreeNode(kat.getListBuah().get(x));
-                node.add(gambar);
-                x++;
-            }
-
-        }
     }
 
     private void showPanelView() {

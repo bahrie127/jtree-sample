@@ -11,11 +11,8 @@
 package sample.jtree.example.ui;
 
 import java.awt.GridLayout;
-import javax.swing.JPanel;
-import sample.jtree.example.entity.Buah;
-import sample.jtree.example.entity.Kategori;
-import sample.jtree.example.impl.ImplementKategori;
-import sample.jtree.example.interf.KategoriInterface;
+import sample.jtree.example.entity.PenyediaData;
+import sample.jtree.example.entity.TreeModelData;
 import sample.jtree.example.util.GaleryListener;
 
 /**
@@ -62,18 +59,8 @@ public class PanelGalery extends javax.swing.JPanel {
     private javax.swing.JPanel gridContent;
     private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
-    private String kategori;
     private int idKat;
     private GaleryListener listener;
-
-    public String getKategori() {
-        return kategori;
-    }
-
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
-        
-    }
 
     public GaleryListener getListener() {
         return listener;
@@ -91,22 +78,28 @@ public class PanelGalery extends javax.swing.JPanel {
         this.idKat = idKat;
     }
 
-    public void isiGalery() {
-        KategoriInterface ki = new ImplementKategori();
+    public void isiGalery(String name) {
+
+//        KategoriInterface ki = new ImplementKategori();
+
+//        Kategori k = ki.getByKat(kategori);
+
+        TreeModelData tmd = PenyediaData.cariTreeModelData(PenyediaData.getListTreeModel(), name);
         PanelGambar pg;
-        Kategori k = ki.getByKat(kategori);
+
         gridContent.removeAll();
         gridContent.setLayout(new GridLayout(0, 3, 20, 20));
-        for (Buah b : k.getListBuah()) {
+        for (TreeModelData data : tmd.getListTreeModel()) {
             pg = new PanelGambar();
-            pg.setPath(b.getPath());
-            pg.setNameTitle(b.getNama());
-            pg.setListener(listener);
+            if (data.getPath() != null) {
+                pg.setPath(data.getPath());
+                pg.setListener(listener);
+            } else {
+                pg.setPath("/sample/jtree/images/folder.png");
+            }
+            pg.setNameTitle(data.getLabel());
+            
             gridContent.add(pg);
         }
     }
-
-    
-    
-    
 }

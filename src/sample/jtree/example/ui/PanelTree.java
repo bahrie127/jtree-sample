@@ -19,7 +19,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import sample.jtree.example.entity.Buah;
+import sample.jtree.example.entity.TreeModelData;
 import sample.jtree.example.util.TreeListener;
 
 /**
@@ -80,10 +80,7 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
     }
 
     public void setModel(DefaultTreeModel model) {
-
-        //  TreePath tp=new TreePath
         tree.setModel(model);
-        //tree.is
         tree.setRootVisible(false);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.addTreeSelectionListener(this);
@@ -99,11 +96,11 @@ public class PanelTree extends javax.swing.JPanel implements TreeSelectionListen
         Object nodeInfo = node.getUserObject();
 
         if (node.isLeaf()) {
-            Buah b = (Buah) nodeInfo;
+            //leaf
+            TreeModelData b =  (TreeModelData) nodeInfo;
             listener.clickLeaf(b.getPath());
-            // System.out.println(node);
         } else {
-            // System.out.println(node.toString());
+            // node
             listener.clickNode(node.toString());
         }
 

@@ -15,7 +15,7 @@ import sample.jtree.example.entity.TreeModelData;
 public class TreeUtil {
 
     // DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
-    public DefaultMutableTreeNode convertModelToNode(List<TreeModelData> listTreeModel, DefaultMutableTreeNode top) {
+    public static DefaultMutableTreeNode convertModelToNode(List<TreeModelData> listTreeModel, DefaultMutableTreeNode top) {
         if (listTreeModel == null) {
             return null;
         }
