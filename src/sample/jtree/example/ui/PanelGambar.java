@@ -10,6 +10,7 @@
  */
 package sample.jtree.example.ui;
 
+import java.awt.Dimension;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import sample.jtree.example.util.GaleryListener;
@@ -23,7 +24,9 @@ public class PanelGambar extends javax.swing.JPanel {
     /** Creates new form PanelGambar */
     public PanelGambar() {
         initComponents();
-
+//        setPreferredSize(new Dimension(32, 32));
+//        setMaximumSize(new Dimension(32, 32));
+//        setMinimumSize(new Dimension(32, 32));
         //labelNama.setText("contoh");
     }
 
@@ -38,6 +41,10 @@ public class PanelGambar extends javax.swing.JPanel {
 
         gambar = new sample.jtree.example.util.JPPanel();
         title = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(80, 80));
+        setMinimumSize(new java.awt.Dimension(40, 40));
+        setPreferredSize(new java.awt.Dimension(80, 80));
 
         gambar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

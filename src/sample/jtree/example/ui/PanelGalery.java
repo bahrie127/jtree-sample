@@ -11,6 +11,8 @@
 package sample.jtree.example.ui;
 
 import java.awt.GridLayout;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import sample.jtree.example.entity.PenyediaData;
 import sample.jtree.example.entity.TreeModelData;
 import sample.jtree.example.util.GaleryListener;
@@ -39,19 +41,27 @@ public class PanelGalery extends javax.swing.JPanel {
         scrollPane = new javax.swing.JScrollPane();
         gridContent = new javax.swing.JPanel();
 
-        gridContent.setLayout(new java.awt.GridLayout(1, 0, 20, 20));
+        javax.swing.GroupLayout gridContentLayout = new javax.swing.GroupLayout(gridContent);
+        gridContent.setLayout(gridContentLayout);
+        gridContentLayout.setHorizontalGroup(
+            gridContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 662, Short.MAX_VALUE)
+        );
+        gridContentLayout.setVerticalGroup(
+            gridContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
         scrollPane.setViewportView(gridContent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
             .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -88,7 +98,7 @@ public class PanelGalery extends javax.swing.JPanel {
         PanelGambar pg;
 
         gridContent.removeAll();
-        gridContent.setLayout(new GridLayout(0, 3, 20, 20));
+        gridContent.setLayout(new GridLayout(0, 4, 0, 0));
         for (TreeModelData data : tmd.getListTreeModel()) {
             pg = new PanelGambar();
             if (data.getPath() != null) {
@@ -99,7 +109,14 @@ public class PanelGalery extends javax.swing.JPanel {
             }
             pg.setNameTitle(data.getLabel());
             
-            gridContent.add(pg);
+            gridContent.add(wrap(pg));
         }
+    }
+    
+    public static JComponent wrap(JComponent comp)
+    {
+        JPanel panel = new JPanel();
+        panel.add(comp);
+        return panel;
     }
 }
