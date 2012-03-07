@@ -15,6 +15,11 @@ public class PenyediaData {
 
     public static List<TreeModelData> getListTreeModel() {
 
+        TreeModelData pisang2 = new TreeModelData();
+        pisang2.setId(13);
+        pisang2.setLabel("Pisang");
+        pisang2.setPath("/sample/jtree/images/pisang2.jpg");
+        
         TreeModelData nasiLiwet = new TreeModelData();
         nasiLiwet.setId(1);
         nasiLiwet.setLabel("Nasi Liwet");
@@ -34,6 +39,7 @@ public class PenyediaData {
         listNasi.add(nasiLiwet);
         listNasi.add(gudeg);
         listNasi.add(nasiGoreng);
+        listNasi.add(pisang2);
 
         TreeModelData nasi = new TreeModelData();
         nasi.setId(4);
