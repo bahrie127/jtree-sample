@@ -16,17 +16,17 @@ public class PenyediaData {
     public static List<TreeModelData> getListTreeModel() {
 
         TreeModelData nasiLiwet = new TreeModelData();
-        //nasiLiwet.setId(1);
+        nasiLiwet.setId(1);
         nasiLiwet.setLabel("Nasi Liwet");
         nasiLiwet.setPath("/sample/jtree/images/nasiliwet.jpg");
 
         TreeModelData gudeg = new TreeModelData();
-        //gudeg.setId(1);
+        gudeg.setId(2);
         gudeg.setLabel("Gudeg");
         gudeg.setPath("/sample/jtree/images/gudeg.jpg");
 
         TreeModelData nasiGoreng = new TreeModelData();
-        //nasiGoreng.setId(1);
+        nasiGoreng.setId(3);
         nasiGoreng.setLabel("Nasi Goreng");
         nasiGoreng.setPath("/sample/jtree/images/nasigoreng.jpg");
 
@@ -36,18 +36,18 @@ public class PenyediaData {
         listNasi.add(nasiGoreng);
 
         TreeModelData nasi = new TreeModelData();
-        //nasi.setId(1);
+        nasi.setId(4);
         nasi.setLabel("Nasi");
         //nasi.setPath("");
         nasi.setListTreeModel(listNasi);
 
         TreeModelData mieAyam = new TreeModelData();
-        //mieAyam.setId(1);
+        mieAyam.setId(5);
         mieAyam.setLabel("Mie Ayam");
         mieAyam.setPath("/sample/jtree/images/mieayam.jpg");
 
         TreeModelData bakso = new TreeModelData();
-        //bakso.setId(1);
+        bakso.setId(6);
         bakso.setLabel("Bakso");
         bakso.setPath("/sample/jtree/images/bakso.jpg");
 
@@ -57,28 +57,28 @@ public class PenyediaData {
         listMakanan.add(nasi);
 
         TreeModelData makanan = new TreeModelData();
-        //makanan.setId(1);
+        makanan.setId(7);
         makanan.setLabel("Makanan");
         //makanan.setPath("");
         makanan.setListTreeModel(listMakanan);
 
         TreeModelData semangka = new TreeModelData();
-        semangka.setId(1);
+        semangka.setId(8);
         semangka.setLabel("Semangka");
         semangka.setPath("/sample/jtree/images/watermelon.jpg");
 
         TreeModelData pisang = new TreeModelData();
-        //pisang.setId(1);
+        pisang.setId(9);
         pisang.setLabel("Pisang");
         pisang.setPath("/sample/jtree/images/banana.jpg");
 
         TreeModelData strowberry = new TreeModelData();
-        //strowberry.setId(1);
+        strowberry.setId(10);
         strowberry.setLabel("Strowberry");
         strowberry.setPath("/sample/jtree/images/strawberry.jpg");
 
         TreeModelData apel = new TreeModelData();
-        //apel.setId(1);
+        apel.setId(11);
         apel.setLabel("Apel");
         apel.setPath("/sample/jtree/images/apple.jpg");
 
@@ -89,7 +89,7 @@ public class PenyediaData {
         listBuah.add(apel);
 
         TreeModelData buah = new TreeModelData();
-        //buah.setId();
+        buah.setId(12);
         buah.setLabel("Buah");
         //buah.setPath("");
         buah.setListTreeModel(listBuah);
@@ -97,8 +97,6 @@ public class PenyediaData {
         List<TreeModelData> listAll = new ArrayList<TreeModelData>();
         listAll.add(buah);
         listAll.add(makanan);
-//        listTreeModel.add(buah);
-//        listTreeModel.add(makanan);
         return listAll;
     }
 

@@ -90,10 +90,6 @@ public class PanelGalery extends javax.swing.JPanel {
 
     public void isiGalery(String name) {
 
-//        KategoriInterface ki = new ImplementKategori();
-
-//        Kategori k = ki.getByKat(kategori);
-
         TreeModelData tmd = PenyediaData.cariTreeModelData(PenyediaData.getListTreeModel(), name);
         PanelGambar pg;
 
@@ -102,10 +98,10 @@ public class PanelGalery extends javax.swing.JPanel {
         for (TreeModelData data : tmd.getListTreeModel()) {
             pg = new PanelGambar();
             if (data.getPath() != null) {
-                pg.setPath(data.getPath());
+                pg.setPath(data.getPath(),data.getId());
                 pg.setListener(listener);
             } else {
-                pg.setPath("/sample/jtree/images/folder.png");
+                pg.setPath("/sample/jtree/images/folder.png",0);
             }
             pg.setNameTitle(data.getLabel());
             

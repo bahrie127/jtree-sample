@@ -22,6 +22,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import sample.jtree.example.entity.PenyediaData;
+import sample.jtree.example.entity.TreeModelData;
 import sample.jtree.example.util.GaleryListener;
 import sample.jtree.example.util.TreeListener;
 import sample.jtree.example.util.TreeUtil;
@@ -34,10 +35,10 @@ public class MainFrame extends javax.swing.JFrame {
         initTreeListener();
         initGaleryListener();
         showPanelGalery();
-        
+
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
 //        setTree(top);
-       // PenyediaData pd=new PenyediaData();
+        // PenyediaData pd=new PenyediaData();
         DefaultTreeModel model = new DefaultTreeModel(TreeUtil.convertModelToNode(PenyediaData.getListTreeModel(), top));
         panelTree.setModel(model);
         //panelTree.setTreePath(autoSelectNode(top, "Semangka"));
@@ -119,13 +120,13 @@ public class MainFrame extends javax.swing.JFrame {
         GaleryListener listener = new GaleryListener() {
 
             @Override
-            public void clickThumbnail(String path,String title) {
+            public void clickThumbnail(String path, int id) {
                 DefaultMutableTreeNode top = new DefaultMutableTreeNode("root");
 //                setTree(top);
                 DefaultTreeModel model = new DefaultTreeModel(TreeUtil.convertModelToNode(PenyediaData.getListTreeModel(), top));
-               // DefaultTreeModel model = new DefaultTreeModel(top);
+                // DefaultTreeModel model = new DefaultTreeModel(top);
                 panelTree.setModel(model);
-                panelTree.setTreePath(autoSelectNode(top, title));
+                panelTree.setTreePath(autoSelectNode(top, id));
                 panelView.setPath(path);
                 showPanelView();
             }
@@ -148,17 +149,20 @@ public class MainFrame extends javax.swing.JFrame {
         showCardLayout(panelGalery, "panelGalery");
     }
 
-    private TreePath autoSelectNode(DefaultMutableTreeNode entityRoot, String nodeStr) {
+    private TreePath autoSelectNode(DefaultMutableTreeNode entityRoot, int id) {
         DefaultMutableTreeNode node = null;
         Enumeration e = entityRoot.breadthFirstEnumeration();
         while (e.hasMoreElements()) {
             node = (DefaultMutableTreeNode) e.nextElement();
-            if ((node.getUserObject().toString()).contains(nodeStr)) {
-                DefaultTreeModel m_model = new DefaultTreeModel(entityRoot);
-                TreeNode[] nodes = m_model.getPathToRoot(node);
-                TreePath path = new TreePath(nodes);
-                return path;
+            if (node.isLeaf()) {
+                if (((TreeModelData)node.getUserObject()).getId()==id) {
+                    DefaultTreeModel m_model = new DefaultTreeModel(entityRoot);
+                    TreeNode[] nodes = m_model.getPathToRoot(node);
+                    TreePath path = new TreePath(nodes);
+                    return path;
+                }
             }
+
         }
         return null;
     }

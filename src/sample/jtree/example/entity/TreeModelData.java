@@ -84,7 +84,7 @@ public class TreeModelData {
 
     @Override
     public String toString() {
-        return this.label;
+        return label;
     }
     
     

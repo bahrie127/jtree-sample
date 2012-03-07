@@ -89,6 +89,7 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
     private String path;
+    private int id;
     private String nameTitle;
     private GaleryListener listener;
 
@@ -96,8 +97,9 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(String path,int id) {
         this.path = path;
+        this.id=id;
         Icon icon = new ImageIcon(getClass().getResource(path));
         gambar.setIcon(icon);
     }
@@ -114,7 +116,7 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
 
     public void gambarMouseClicked() {
         if (listener != null) {
-            listener.clickThumbnail(path, nameTitle);
+            listener.clickThumbnail(path, id);
         }
     }
 
