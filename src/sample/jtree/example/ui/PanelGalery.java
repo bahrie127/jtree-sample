@@ -155,6 +155,8 @@ private void gridContentComponentResized(java.awt.event.ComponentEvent evt) {//G
             pg.setPath(null, 0);
             gridContent.add(pg);
         }
+        
+        repaint();
 //        
     }
 
