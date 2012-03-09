@@ -24,10 +24,6 @@ public class PanelGambar extends javax.swing.JPanel {
     /** Creates new form PanelGambar */
     public PanelGambar() {
         initComponents();
-//        setPreferredSize(new Dimension(32, 32));
-//        setMaximumSize(new Dimension(32, 32));
-//        setMinimumSize(new Dimension(32, 32));
-        //labelNama.setText("contoh");
     }
 
     /** This method is called from within the constructor to
@@ -39,12 +35,15 @@ public class PanelGambar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gambar = new sample.jtree.example.util.JPPanel();
         title = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        gambar = new sample.jtree.example.util.JPPanel();
 
         setMaximumSize(new java.awt.Dimension(80, 80));
         setMinimumSize(new java.awt.Dimension(40, 40));
         setPreferredSize(new java.awt.Dimension(80, 80));
+
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         gambar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -56,26 +55,43 @@ public class PanelGambar extends javax.swing.JPanel {
         gambar.setLayout(gambarLayout);
         gambarLayout.setHorizontalGroup(
             gambarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 124, Short.MAX_VALUE)
         );
         gambarLayout.setVerticalGroup(
             gambarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
         );
 
-        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 124, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(gambar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(gambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-            .addComponent(gambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(gambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -86,6 +102,7 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
 }//GEN-LAST:event_gambarMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private sample.jtree.example.util.JPPanel gambar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
     private String path;
@@ -100,8 +117,10 @@ private void gambarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     public void setPath(String path,int id) {
         this.path = path;
         this.id=id;
+        if(path!=null){
         Icon icon = new ImageIcon(getClass().getResource(path));
         gambar.setIcon(icon);
+        }
     }
 
     public String getNameTitle() {

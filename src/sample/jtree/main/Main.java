@@ -10,7 +10,8 @@ package sample.jtree.main;
  */
 public class Main {
     public static void main(String[] args) {
-        
+        double i=3.2;
+        System.out.println(Math.floor(i));
     }
     
 }

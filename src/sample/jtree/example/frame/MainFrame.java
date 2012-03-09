@@ -103,7 +103,8 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickNode(String kategori) {
-                panelGalery.isiGalery(kategori);
+                panelGalery.setNama(kategori);
+                panelGalery.isiGalery();
                 showPanelGalery();
             }
 
@@ -132,7 +133,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         };
         panelGalery.setListener(listener);
-        panelGalery.isiGalery("Buah");
+        panelGalery.setNama("Buah");
+        panelGalery.isiGalery();
     }
 
     private void showCardLayout(JPanel componentCardLayout, String cardName) {

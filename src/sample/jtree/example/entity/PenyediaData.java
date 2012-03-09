@@ -82,6 +82,42 @@ public class PenyediaData {
         strowberry.setId(10);
         strowberry.setLabel("Strowberry");
         strowberry.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry2 = new TreeModelData();
+        strowberry2.setId(15);
+        strowberry2.setLabel("Strowberry");
+        strowberry2.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry3 = new TreeModelData();
+        strowberry3.setId(16);
+        strowberry3.setLabel("Strowberry");
+        strowberry3.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry4 = new TreeModelData();
+        strowberry4.setId(17);
+        strowberry4.setLabel("Strowberry");
+        strowberry4.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry5 = new TreeModelData();
+        strowberry5.setId(18);
+        strowberry5.setLabel("Strowberry");
+        strowberry5.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry6 = new TreeModelData();
+        strowberry6.setId(19);
+        strowberry6.setLabel("Strowberry");
+        strowberry6.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        TreeModelData strowberry7 = new TreeModelData();
+        strowberry7.setId(20);
+        strowberry7.setLabel("Strowberry");
+        strowberry7.setPath("/sample/jtree/images/strawberry.jpg");
+        
+        
+        TreeModelData apelijo = new TreeModelData();
+        apelijo.setId(14);
+        apelijo.setLabel("Apel Ijo");
+        apelijo.setPath("/sample/jtree/images/ijoapel.jpg");
 
         TreeModelData apel = new TreeModelData();
         apel.setId(11);
@@ -93,11 +129,17 @@ public class PenyediaData {
         listBuah.add(pisang);
         listBuah.add(strowberry);
         listBuah.add(apel);
-
+        listBuah.add(apelijo);
+        listBuah.add(strowberry2);
+        listBuah.add(strowberry3);
+        listBuah.add(strowberry4);
+        listBuah.add(strowberry5);
+        listBuah.add(strowberry6);
+        
         TreeModelData buah = new TreeModelData();
         buah.setId(12);
         buah.setLabel("Buah");
-        //buah.setPath("");
+        
         buah.setListTreeModel(listBuah);
 
         List<TreeModelData> listAll = new ArrayList<TreeModelData>();

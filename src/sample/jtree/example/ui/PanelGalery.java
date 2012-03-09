@@ -10,6 +10,7 @@
  */
 package sample.jtree.example.ui;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -26,7 +27,9 @@ public class PanelGalery extends javax.swing.JPanel {
     /** Creates new form PanelGalery */
     public PanelGalery() {
         initComponents();
-
+       lebarLayar=this.getPreferredSize().width;
+       tinggiLayar=this.getPreferredSize().height;
+     
     }
 
     /** This method is called from within the constructor to
@@ -40,6 +43,14 @@ public class PanelGalery extends javax.swing.JPanel {
 
         scrollPane = new javax.swing.JScrollPane();
         gridContent = new javax.swing.JPanel();
+
+        gridContent.setMaximumSize(new java.awt.Dimension(80, 80));
+        gridContent.setPreferredSize(new java.awt.Dimension(80, 80));
+        gridContent.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                gridContentComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout gridContentLayout = new javax.swing.GroupLayout(gridContent);
         gridContent.setLayout(gridContentLayout);
@@ -65,12 +76,33 @@ public class PanelGalery extends javax.swing.JPanel {
             .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+private void gridContentComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_gridContentComponentResized
+    gridContent.removeAll();
+    
+    lebarLayar=this.getWidth();
+       tinggiLayar=this.getHeight();
+       
+       isiGalery();
+      
+}//GEN-LAST:event_gridContentComponentResized
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel gridContent;
     private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
     private int idKat;
+    private String nama;
     private GaleryListener listener;
+    private GridBagConstraints constraints;
+    
+    private int widthCell=90;
+    private int heightCell=90;
+    private int jumlahGambar;
+    private int colomGrid;
+    private int barisGrid;
+    private int lebarLayar;
+    private int tinggiLayar;
 
     public GaleryListener getListener() {
         return listener;
@@ -87,32 +119,60 @@ public class PanelGalery extends javax.swing.JPanel {
     public void setIdKat(int idKat) {
         this.idKat = idKat;
     }
+    
+    public void setNama(String name){
+        this.nama=name;
+    }
 
-    public void isiGalery(String name) {
+    
+    public void isiGalery() {
 
-        TreeModelData tmd = PenyediaData.cariTreeModelData(PenyediaData.getListTreeModel(), name);
-        PanelGambar pg;
-
+        TreeModelData tmd = PenyediaData.cariTreeModelData(PenyediaData.getListTreeModel(), nama);
+       
+        jumlahGambar=tmd.getListTreeModel().size();
         gridContent.removeAll();
-        gridContent.setLayout(new GridLayout(0, 4, 0, 0));
+        
+        siapkanVariable();
+        
+        int sisaGrid=(barisGrid*colomGrid)-jumlahGambar;
+        gridContent.setLayout(new GridLayout(barisGrid, colomGrid, 20, 20));
+        //gridContent.setLayout(new GridLayout(0, 4, 20, 20));
         for (TreeModelData data : tmd.getListTreeModel()) {
-            pg = new PanelGambar();
+            PanelGambar pg = new PanelGambar();
             if (data.getPath() != null) {
-                pg.setPath(data.getPath(),data.getId());
+                pg.setPath(data.getPath(), data.getId());
                 pg.setListener(listener);
             } else {
-                pg.setPath("/sample/jtree/images/folder.png",0);
+                pg.setPath("/sample/jtree/images/folder.png", 0);
             }
             pg.setNameTitle(data.getLabel());
-            
-            gridContent.add(wrap(pg));
+
+            gridContent.add(pg);
         }
+//        
+        for(int i=0;i<sisaGrid;i++){
+            PanelGambar pg = new PanelGambar();
+            pg.setPath(null, 0);
+            gridContent.add(pg);
+        }
+//        
     }
-    
-    public static JComponent wrap(JComponent comp)
-    {
+
+    public static JComponent wrap(JComponent comp) {
         JPanel panel = new JPanel();
         panel.add(comp);
         return panel;
     }
+
+   public void siapkanVariable(){
+       
+       colomGrid=(int) Math.ceil(lebarLayar/widthCell);
+       barisGrid=(int) Math.ceil(jumlahGambar/colomGrid);
+       if(barisGrid*heightCell<tinggiLayar){
+           barisGrid=(int) Math.floor(tinggiLayar/heightCell);
+       }
+       
+   }
+   
+   
 }
